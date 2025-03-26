@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './form.css'
+import './Form.css'
 
 function Form() {
     const [symbol, setSymbol] = useState("");
@@ -18,9 +18,25 @@ function Form() {
     };
 
 
+    const handleSubmit = (event) => {
+        event.preventDefault(); 
+
+        if (!symbol || !quantity || !price) {
+            alert("Please fill in all fields.");
+            return;
+        }
+        
+        const newStock = { symbol, quantity, price: parseFloat(price).toFixed(2) };
+        setStocks([...stocks, newStock]);
+
+        setSymbol("");
+        setQuantity("");
+        setPrice("");
+    };
+
     return(
         <>
-            <form className='form-group'>
+            <form className='form-group' onSubmit={handleSubmit}>
                 <input className='form-box' type="text" value={symbol} onChange={handleSymbolChange} placeholder="Stock Symbol" />
                 <input className='form-box' type="text" value={quantity} onChange={handleQuantityChange} placeholder="Quantity" />
                 <input className='form-box' type="text" value={price} onChange={handlePriceChange} placeholder="Purchase Price" />
@@ -28,7 +44,18 @@ function Form() {
                 <button className='button'>Add Stock</button>
             </form>
             <h1>Stock List</h1>
-            <p className='no-info'>No stocks added yet.</p>
+
+            {stocks.length === 0 ? (
+                <p className='no-info'>No Stocks To Display</p>
+            ) : (
+                <ul className='stocks-log'>
+                    {stocks.map((stock, index) => (
+                        <li className='stocks-list' key={index}>
+                            {stock.symbol} , {stock.quantity} shares at ${stock.price}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </>
     )
 }
