@@ -1,13 +1,14 @@
 .form-group {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     text-align: center;
+    margin-left: 100px;
     gap: 20px
 }   
 
 .form-box {
     display: flex;
-    padding: 5px;
+    padding: 10px;
     text-align: left;
 }
 
@@ -28,10 +29,27 @@
 }
 
 ul {
-    text-align: center;
+    list-style-type:none ;
+    text-align: left;
     list-style-position: inside;
+    margin-left: 100px;
+    padding: 0;
+}
+
+li {
+    line-height: 10px;
+    display: block;
+    border: 2px solid;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px  gray;
+    margin-top: 20px;
+    padding-left: 20px;
+    width: 800px;
+    
 }
 
 h1 {
-    text-align: center;
+    display: flex;
+    text-align: left;
+    margin-left: 100px;
 }
