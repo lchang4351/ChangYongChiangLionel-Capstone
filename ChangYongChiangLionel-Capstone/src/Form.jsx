@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import './Form.css';
 
-export default function Form() {
+
+
+export default function Form({ stocks, setStocks }) {
     const [symbol, setSymbol] = useState("");
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
-    const [stocks, setStocks] = useState([]);
+
 
     const handleSymbolChange = (event) => setSymbol(event.target.value.toUpperCase());
     const handleQuantityChange = (event) => setQuantity(event.target.value);
@@ -62,33 +64,6 @@ export default function Form() {
                 <input className="form-box" type="number" placeholder="Purchase Price" value={price} onChange={handlePriceChange} />
                 <button className="button">Add Stock</button>
             </form>
-
-            <h1>Stock List</h1>
-            <ul>
-                {stocks.map((stock, index) => {
-                    const formattedCurrentPrice =
-                        !isNaN(stock.currentPrice) && stock.currentPrice !== "N/A"
-                            ? Number(stock.currentPrice).toFixed(2)
-                            : "N/A";
-
-                    const profitLoss =
-                        !isNaN(stock.currentPrice) && !isNaN(stock.price)
-                            ? ((stock.currentPrice - stock.price) * stock.quantity).toFixed(2)
-                            : "N/A";
-
-                    return (
-                        <li key={index}>
-                            <p>Symbol: {stock.symbol}</p>
-                            <p>Quantity: {stock.quantity}</p>
-                            <p>Purchase Price: {stock.price.toFixed(2)}</p>
-                            <p>Current Price: {formattedCurrentPrice}</p>
-                            <p style={{ color: profitLoss > 0 ? "green" : profitLoss < 0 ? "red" : "black" }}>
-                                Profit/Loss: {profitLoss !== "N/A" ? ` ${profitLoss > 0 ? "+" : ""}${profitLoss}` : " N/A"}
-                            </p>
-                        </li>
-                    );
-                })}
-            </ul>
         </>
     );
 }
