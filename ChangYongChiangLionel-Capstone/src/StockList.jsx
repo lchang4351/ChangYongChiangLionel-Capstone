@@ -1,4 +1,8 @@
-export default function StockList ({ stocks }) {
+import { useContext } from "react";
+import { StockContext } from "./StockContext";
+
+export default function StockList () {
+    const { stocks } = useContext(StockContext)
     
     return(
         <>

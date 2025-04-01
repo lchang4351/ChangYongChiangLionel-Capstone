@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { StockContext } from './StockContext';
+
 import './Form.css';
 
 
 
-export default function Form({ stocks, setStocks }) {
+export default function Form() {
     const [symbol, setSymbol] = useState("");
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
+    const {stocks, setStocks} = useContext(StockContext)
 
 
     const handleSymbolChange = (event) => setSymbol(event.target.value.toUpperCase());
