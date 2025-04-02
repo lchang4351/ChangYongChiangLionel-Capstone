@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import { StockContext } from './StockContext';
 
+import Button from '@mui/material/Button';
 import './Form.css';
 
 
@@ -65,7 +66,19 @@ export default function Form() {
             <input className="form-box" type="text" placeholder="Stock Symbol" value={symbol} onChange={handleSymbolChange} />
                 <input className="form-box" type="number" placeholder="Quantity" value={quantity} onChange={handleQuantityChange} />
                 <input className="form-box" type="number" placeholder="Purchase Price" value={price} onChange={handlePriceChange} />
-                <button className="button">Add Stock</button>
+                {/* <button className="button" disabled={!symbol || !quantity || !price}>Add Stock</button> */}
+                <Button 
+                type='submit'
+                variant={!symbol  || !quantity || !price ? "outlined" : "contained"}
+                color={!symbol || !quantity || !price ? "error": "success"}
+                onClick ={(e) => {
+                    if (!symbol || !quantity || !price){
+                        e.preventDefault();
+                    }
+                }}
+                >
+                    Add Stock
+                </Button>
             </form>
         </>
     );

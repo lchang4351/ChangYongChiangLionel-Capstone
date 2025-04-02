@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { StockContext } from "./StockContext";
+import { Card } from "antd";
+
 
 export default function StockList () {
     const { stocks } = useContext(StockContext)
@@ -19,16 +21,20 @@ export default function StockList () {
                             : "N/A";
 
                     return (
-                        <li key={index}>
-                            <p>Symbol: {stock.symbol}</p>
-                            <p>Quantity: {stock.quantity}</p>
+                        <Card
+                        key={index}
+                        title={stock.symbol}
+                        style={{ width: 300, marginBottom: "20px" }}
+                        >
+                            <p >Quantity: {stock.quantity}</p>
                             <p>Purchase Price: {stock.price.toFixed(2)}</p>
                             <p>Current Price: {formattedCurrentPrice}</p>
                             <p style={{ color: profitLoss > 0 ? "green" : profitLoss < 0 ? "red" : "black" }}>
                                 Profit/Loss: {profitLoss !== "N/A" ? ` ${profitLoss > 0 ? "+" : ""}${profitLoss}` : " N/A"}
                             </p>
-                        </li>
-                    );
+
+                        </Card>
+                    )
                 })}
             </ul>
         </>
